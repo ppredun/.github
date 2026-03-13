@@ -1,0 +1,17 @@
+<svg viewBox="0 0 660 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #FAFAFA">
+  <!-- Symbol (Fibonacci: r1=8, r2=13, d=34) -->
+  <circle cx="24" cy="50" r="8" fill="none" stroke="currentColor" stroke-width="3.5"/>
+  <line x1="32" y1="50" x2="45" y2="50" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="58" cy="50" r="13" fill="currentColor" stroke="currentColor" stroke-width="3.5"/>
+  <line x1="71" y1="50" x2="79" y2="50" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+  <polyline points="77,43 84,50 77,57" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Wordmark -->
+  <g transform="translate(120,0)">
+    <path d="M10,30 L10,95 M10,30 Q10,15 25,15 L35,15 Q50,15 50,30 L50,45 Q50,60 35,60 L25,60 Q10,60 10,45" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M70,60 L70,15 M70,15 Q70,15 70,25 Q75,15 88,15" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M108,38 L148,38 Q148,15 128,15 Q108,15 108,38 Q108,60 128,60 Q142,60 148,50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M198,45 Q198,60 183,60 L173,60 Q158,60 158,45 L158,30 Q158,15 173,15 L183,15 Q198,15 198,30 M198,0 L198,60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M218,15 L218,45 Q218,60 233,60 L243,60 Q258,60 258,45 L258,15" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M278,60 L278,15 M278,30 Q278,15 293,15 L303,15 Q318,15 318,30 L318,60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
