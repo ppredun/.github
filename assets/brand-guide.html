@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>predun Brand Guide</title>
+<style>
+/* ===== CSS Custom Properties ===== */
+:root {
+  --brand-black: #0A0A0A;
+  --brand-900: #1A1A1A;
+  --brand-700: #404040;
+  --brand-500: #737373;
+  --brand-300: #B0B0B0;
+  --brand-100: #E5E5E5;
+  --brand-white: #FAFAFA;
+  --accent: #0A0A0A;
+
+  --bg: var(--brand-white);
+  --bg-secondary: #F0F0F0;
+  --text: var(--brand-black);
+  --text-secondary: var(--brand-700);
+  --text-muted: var(--brand-500);
+  --border: var(--brand-100);
+  --sidebar-bg: var(--brand-black);
+  --sidebar-text: var(--brand-white);
+  --sidebar-active: var(--brand-white);
+  --code-bg: #F5F5F5;
+  --card-bg: #FFFFFF;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.08);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  --radius: 8px;
+  --sidebar-width: 260px;
+}
+
+[data-theme="dark"] {
+  --bg: var(--brand-900);
+  --bg-secondary: #222222;
+  --text: var(--brand-white);
+  --text-secondary: var(--brand-300);
+  --text-muted: var(--brand-500);
+  --border: #333333;
+  --sidebar-bg: #111111;
+  --code-bg: #2A2A2A;
+  --card-bg: #1E1E1E;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --accent: var(--brand-white);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: var(--brand-900);
+    --bg-secondary: #222222;
+    --text: var(--brand-white);
+    --text-secondary: var(--brand-300);
+    --text-muted: var(--brand-500);
+    --border: #333333;
+    --sidebar-bg: #111111;
+    --code-bg: #2A2A2A;
+    --card-bg: #1E1E1E;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    --accent: var(--brand-white);
+  }
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  min-height: 100vh;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-width); height: 100vh;
+  background: var(--sidebar-bg); color: var(--sidebar-text);
+  padding: var(--space-xl) 0;
+  overflow-y: auto; z-index: 100;
+  display: flex; flex-direction: column;
+}
+.sidebar-logo { padding: 0 var(--space-lg); margin-bottom: var(--space-xl); }
+.sidebar-logo svg { width: 100px; height: auto; }
+.sidebar nav { flex: 1; }
+.sidebar nav a {
+  display: block; padding: var(--space-sm) var(--space-lg);
+  color: var(--sidebar-text); text-decoration: none;
+  font-size: 0.875rem; opacity: 0.6;
+  transition: opacity 0.2s; border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { opacity: 0.85; }
+.sidebar nav a.active { opacity: 1; border-left-color: var(--sidebar-active); font-weight: 600; }
+.sidebar-footer { padding: var(--space-md) var(--space-lg); border-top: 1px solid rgba(255,255,255,0.1); }
+.theme-toggle {
+  background: transparent; border: 1px solid rgba(255,255,255,0.2);
+  color: var(--sidebar-text); padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius); cursor: pointer; font-size: 0.8rem; width: 100%;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.1); }
+
+/* ===== Main ===== */
+.main { grid-column: 2; padding: var(--space-3xl) var(--space-2xl); max-width: 960px; }
+section { margin-bottom: var(--space-3xl); padding-bottom: var(--space-3xl); border-bottom: 1px solid var(--border); }
+section:last-child { border-bottom: none; }
+
+h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: var(--space-md); }
+h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: var(--space-lg); }
+h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-md); margin-top: var(--space-xl); }
+h3:first-child { margin-top: 0; }
+p { margin-bottom: var(--space-md); color: var(--text-secondary); max-width: 640px; }
+
+/* ===== Components ===== */
+.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-lg); box-shadow: var(--card-shadow); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-bottom: var(--space-lg); }
+th, td { padding: var(--space-sm) var(--space-md); text-align: left; border-bottom: 1px solid var(--border); }
+th { font-weight: 600; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+td { color: var(--text-secondary); }
+
+code { background: var(--code-bg); padding: 0.15em 0.4em; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85em; }
+pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-md); overflow-x: auto; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; margin-bottom: var(--space-lg); position: relative; }
+.copy-btn { position: absolute; top: var(--space-sm); right: var(--space-sm); background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-size: 0.7rem; cursor: pointer; color: var(--text-muted); }
+.copy-btn:hover { color: var(--text); }
+
+/* ===== Logo Preview Boxes ===== */
+.logo-row { display: flex; gap: var(--space-lg); flex-wrap: wrap; margin-bottom: var(--space-lg); }
+.logo-box {
+  flex: 1; min-width: 220px; border-radius: var(--radius);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: var(--space-xl) var(--space-lg); position: relative;
+}
+.logo-box-label {
+  position: absolute; bottom: 0.5rem; right: 0.75rem;
+  font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.5;
+}
+
+/* ===== Hero ===== */
+.hero { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 60vh; border-bottom: none; padding-bottom: var(--space-2xl); }
+.hero-logo { margin-bottom: var(--space-xl); }
+.hero-logo svg { width: 320px; height: auto; }
+.hero h1 { font-size: 3rem; margin-bottom: var(--space-sm); }
+.hero .tagline { font-size: 1.25rem; color: var(--text-muted); font-weight: 400; letter-spacing: 0.02em; }
+
+/* ===== Swatches ===== */
+.swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl); }
+.swatch { cursor: pointer; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); transition: transform 0.15s; }
+.swatch:hover { transform: translateY(-2px); }
+.swatch-color { height: 80px; }
+.swatch-info { padding: var(--space-sm); background: var(--card-bg); }
+.swatch-name { font-size: 0.75rem; font-weight: 600; }
+.swatch-hex { font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); }
+
+/* ===== Type Scale ===== */
+.type-row { display: flex; align-items: baseline; gap: var(--space-lg); padding: var(--space-md) 0; border-bottom: 1px solid var(--border); }
+.type-label { flex-shrink: 0; width: 100px; font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); }
+
+/* ===== Do/Don't ===== */
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-xl); }
+.do-list, .dont-list { padding: var(--space-lg); border-radius: var(--radius); }
+.do-list { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2); }
+.dont-list { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); }
+.do-list h4 { color: #16a34a; margin-bottom: var(--space-md); }
+.dont-list h4 { color: #dc2626; margin-bottom: var(--space-md); }
+.do-list li, .dont-list li { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--space-xs); margin-left: var(--space-lg); }
+
+/* ===== Applications ===== */
+.mockup { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: var(--space-lg); }
+.mockup-header { padding: var(--space-sm) var(--space-md); background: var(--bg-secondary); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: var(--space-sm); }
+.mockup-dots { display: flex; gap: 6px; }
+.mockup-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+.biz-card { width: 340px; height: 200px; background: var(--brand-black); color: var(--brand-white); border-radius: var(--radius); padding: var(--space-lg); display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+.biz-card-name { font-size: 1rem; font-weight: 600; }
+.biz-card-title { font-size: 0.75rem; opacity: 0.6; }
+.biz-card-contact { font-size: 0.7rem; opacity: 0.5; line-height: 1.6; }
+
+/* ===== Misuse ===== */
+.misuse-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin-bottom: var(--space-lg); }
+.misuse-item { border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-lg); text-align: center; position: relative; }
+.misuse-item::after { content: "\2715"; position: absolute; top: var(--space-sm); right: var(--space-sm); color: #dc2626; font-weight: 700; font-size: 1.2rem; }
+.misuse-item svg { opacity: 0.6; }
+.misuse-label { font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-sm); }
+
+/* ===== Construction ===== */
+.construction-grid line { stroke: var(--brand-300); stroke-width: 0.5; opacity: 0.3; }
+.construction-grid .axis { stroke: var(--brand-500); stroke-width: 1; opacity: 0.5; }
+.dim-line { stroke: #DC2626; stroke-width: 0.4; stroke-dasharray: 1.5,1; }
+.dim-label { font-size: 3.5px; fill: #DC2626; font-family: var(--font-mono); }
+.coord-dot { fill: #DC2626; }
+.coord-label { font-size: 3px; fill: var(--text-muted); font-family: var(--font-mono); }
+.fib-label { font-size: 4px; fill: #2563EB; font-family: var(--font-sans); font-weight: 600; }
+.ratio-badge { display: inline-block; background: #EFF6FF; color: #2563EB; font-size: 0.7rem; font-weight: 600; padding: 0.15em 0.5em; border-radius: 4px; font-family: var(--font-mono); }
+.fib-bar { display: flex; gap: 2px; margin-bottom: var(--space-lg); height: 32px; border-radius: 6px; overflow: hidden; }
+.fib-bar div { display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: white; font-family: var(--font-mono); }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  body { grid-template-columns: 1fr; }
+  .sidebar { position: fixed; width: 100%; height: auto; max-height: 0; overflow: hidden; transition: max-height 0.3s; padding: 0; }
+  .sidebar.open { max-height: 100vh; padding: var(--space-lg) 0; overflow-y: auto; }
+  .mobile-header { display: flex; position: fixed; top: 0; left: 0; right: 0; height: 56px; background: var(--sidebar-bg); color: var(--sidebar-text); align-items: center; justify-content: space-between; padding: 0 var(--space-md); z-index: 101; }
+  .mobile-header svg { width: 80px; height: auto; }
+  .hamburger { background: none; border: none; color: var(--sidebar-text); font-size: 1.5rem; cursor: pointer; }
+  .main { grid-column: 1; padding: calc(56px + var(--space-xl)) var(--space-md) var(--space-xl); max-width: 100%; }
+  .hero h1 { font-size: 2rem; }
+  .hero-logo svg { width: 200px; }
+  .logo-row, .grid-2, .grid-3, .grid-4, .do-dont, .misuse-grid { grid-template-columns: 1fr; }
+  .logo-row { flex-direction: column; }
+  .type-row { flex-direction: column; gap: var(--space-xs); }
+}
+@media (min-width: 769px) { .mobile-header { display: none; } }
+
+/* ===== Print ===== */
+@media print {
+  body { display: block; }
+  .sidebar, .mobile-header, .theme-toggle, .copy-btn { display: none; }
+  .main { padding: 0; max-width: 100%; }
+  section { break-inside: avoid; }
+  .hero { min-height: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG Definitions ===== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <!-- Symbol: Golden Ratio / Fibonacci (8, 13, 21, 34) -->
+    <symbol id="logo-symbol" viewBox="0 0 100 100">
+      <circle cx="24" cy="50" r="8" fill="none" stroke="currentColor" stroke-width="3.5"/>
+      <line x1="32" y1="50" x2="45" y2="50" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="58" cy="50" r="13" fill="currentColor" stroke="currentColor" stroke-width="3.5"/>
+      <line x1="71" y1="50" x2="79" y2="50" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+      <polyline points="77,43 84,50 77,57" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- Wordmark: "predun" geometric sans-serif -->
+    <symbol id="logo-wordmark" viewBox="0 0 520 100">
+      <path d="M10,30 L10,95 M10,30 Q10,15 25,15 L35,15 Q50,15 50,30 L50,45 Q50,60 35,60 L25,60 Q10,60 10,45" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M70,60 L70,15 M70,15 Q70,15 70,25 Q75,15 88,15" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M108,38 L148,38 Q148,15 128,15 Q108,15 108,38 Q108,60 128,60 Q142,60 148,50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M198,45 Q198,60 183,60 L173,60 Q158,60 158,45 L158,30 Q158,15 173,15 L183,15 Q198,15 198,30 M198,0 L198,60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M218,15 L218,45 Q218,60 233,60 L243,60 Q258,60 258,45 L258,15" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M278,60 L278,15 M278,30 Q278,15 293,15 L303,15 Q318,15 318,30 L318,60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- Full logo: symbol + wordmark -->
+    <symbol id="logo-full" viewBox="0 0 660 100">
+      <use href="#logo-symbol" x="0" y="0" width="100" height="100"/>
+      <use href="#logo-wordmark" x="120" y="0" width="520" height="100"/>
+    </symbol>
+
+    <!-- Favicon -->
+    <symbol id="logo-favicon" viewBox="0 0 32 32">
+      <circle cx="9" cy="16" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+      <line x1="13" y1="16" x2="17" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="22" cy="16" r="5" fill="currentColor" stroke="currentColor" stroke-width="2"/>
+      <polyline points="27,16 30,16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <polyline points="28.5,13 31,16 28.5,19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===== Mobile Header ===== -->
+<div class="mobile-header">
+  <svg width="80" height="24" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">&#9776;</button>
+</div>
+
+<!-- ===== Sidebar ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <svg viewBox="0 0 100 100" style="color:var(--sidebar-text)"><use href="#logo-symbol"/></svg>
+  </div>
+  <nav id="nav">
+    <a href="#cover">Cover</a>
+    <a href="#story">Brand Story</a>
+    <a href="#logo">Logo</a>
+    <a href="#construction">Logo Construction</a>
+    <a href="#color">Color System</a>
+    <a href="#typography">Typography</a>
+    <a href="#voice">Tone &amp; Voice</a>
+    <a href="#applications">Applications</a>
+    <a href="#assets">Assets</a>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+  </div>
+</aside>
+
+<!-- ===== Main Content ===== -->
+<main class="main">
+
+  <!-- 1. Cover / Hero -->
+  <section class="hero" id="cover">
+    <div class="hero-logo">
+      <svg viewBox="0 0 660 100" style="color:var(--text)"><use href="#logo-full"/></svg>
+    </div>
+    <h1>Brand Guide</h1>
+    <p class="tagline">Pre-done — 시작하기 전에 이미 완료</p>
+  </section>
+
+  <!-- 2. Brand Story -->
+  <section id="story">
+    <h2>Brand Story</h2>
+    <h3>이름의 유래</h3>
+    <p><strong>predun</strong>(프리던)은 <em>Pre-done</em>의 합성어입니다. "시작 전에 이미 완료" — AI가 미리 예측하고 준비해서, 사용자가 시작하는 순간 이미 결과가 기다리고 있는 경험을 만듭니다.</p>
+    <h3>미션</h3>
+    <p>AI가 미리 예측하고 준비해서, 사용자가 시작할 때 이미 결과가 있다. 기다림 없는 세계를 만든다.</p>
+    <h3>창업 배경</h3>
+    <p>항공 발권 시스템 개발자 출신 4인이 모였습니다. 복잡한 시스템을 빠르고 정확하게 처리하는 경험을 AI 서비스에 접목합니다. 속도와 정확성은 우리의 DNA입니다.</p>
+    <h3>비전</h3>
+    <p>"시작하자마자 끝" — 이 한 문장이 우리가 만드는 모든 제품의 기준입니다. 서비스 영역은 아직 열려 있지만, 어떤 도메인이든 이 원칙은 변하지 않습니다.</p>
+    <div class="grid-3" style="margin-top:var(--space-xl);">
+      <div class="card"><h3>Speed</h3><p style="margin-bottom:0">시작 전에 결과가 준비되어 있다</p></div>
+      <div class="card"><h3>Precision</h3><p style="margin-bottom:0">항공 발권 시스템 수준의 정확성</p></div>
+      <div class="card"><h3>Simplicity</h3><p style="margin-bottom:0">복잡함은 안에, 간결함은 밖에</p></div>
+    </div>
+  </section>
+
+  <!-- 3. Logo -->
+  <section id="logo">
+    <h2>Logo</h2>
+    <p>predun 로고는 심볼 아이콘과 워드마크의 조합입니다. 시작점(빈 원, r=8)에서 끝점(채워진 원, r=13)으로의 이동은 "시작 전에 이미 완료"라는 브랜드 메시지를 시각화합니다. 두 원의 반지름 비율은 황금비(φ ≈ 1.618)를 따릅니다.</p>
+
+    <!-- 3-1. Mono -->
+    <h3>Mono — Black &amp; White</h3>
+    <div class="logo-row">
+      <div class="logo-box" style="background:#0A0A0A;">
+        <svg width="280" height="46" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Black / White</span>
+      </div>
+      <div class="logo-box" style="background:#FAFAFA; border:1px solid #E5E5E5;">
+        <svg width="280" height="46" viewBox="0 0 660 100" style="color:#0A0A0A"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#0A0A0A;">White / Black</span>
+      </div>
+    </div>
+    <div class="logo-row">
+      <div class="logo-box" style="background:#0A0A0A; padding:var(--space-lg);">
+        <svg width="100" height="100" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Symbol</span>
+      </div>
+      <div class="logo-box" style="background:#FAFAFA; border:1px solid #E5E5E5; padding:var(--space-lg);">
+        <svg width="100" height="100" viewBox="0 0 100 100" style="color:#0A0A0A"><use href="#logo-symbol"/></svg>
+        <span class="logo-box-label" style="color:#0A0A0A;">Symbol</span>
+      </div>
+      <div class="logo-box" style="background:#0A0A0A;">
+        <svg width="200" height="42" viewBox="0 0 520 100" style="color:#FAFAFA"><use href="#logo-wordmark"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Wordmark</span>
+      </div>
+      <div class="logo-box" style="background:#FAFAFA; border:1px solid #E5E5E5;">
+        <svg width="200" height="42" viewBox="0 0 520 100" style="color:#0A0A0A"><use href="#logo-wordmark"/></svg>
+        <span class="logo-box-label" style="color:#0A0A0A;">Wordmark</span>
+      </div>
+    </div>
+
+    <!-- 3-2. Solid Color Backgrounds -->
+    <h3>Solid Color Backgrounds</h3>
+    <div class="logo-row">
+      <div class="logo-box" style="background:#1E3A5F;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Navy #1E3A5F</span>
+      </div>
+      <div class="logo-box" style="background:#7C3AED;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Violet #7C3AED</span>
+      </div>
+    </div>
+    <div class="logo-row">
+      <div class="logo-box" style="background:#DC2626;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Red #DC2626</span>
+      </div>
+      <div class="logo-box" style="background:#059669;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Emerald #059669</span>
+      </div>
+    </div>
+    <div class="logo-row">
+      <div class="logo-box" style="background:#F59E0B;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#0A0A0A"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#0A0A0A;">Amber #F59E0B</span>
+      </div>
+      <div class="logo-box" style="background:#06B6D4;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#0A0A0A"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#0A0A0A;">Cyan #06B6D4</span>
+      </div>
+    </div>
+
+    <!-- Symbol on Solids -->
+    <div class="logo-row" style="gap:var(--space-md);">
+      <div class="logo-box" style="background:#1E3A5F; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#7C3AED; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#DC2626; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#059669; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#F59E0B; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#0A0A0A"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#06B6D4; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#0A0A0A"><use href="#logo-symbol"/></svg>
+      </div>
+    </div>
+
+    <!-- 3-3. Colored Logo -->
+    <h3>Colored Logo on Neutral</h3>
+    <div class="logo-row">
+      <div class="logo-box" style="background:#FAFAFA; border:1px solid #E5E5E5;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#2563EB"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#2563EB;">Blue #2563EB</span>
+      </div>
+      <div class="logo-box" style="background:#FAFAFA; border:1px solid #E5E5E5;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#7C3AED"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#7C3AED;">Violet #7C3AED</span>
+      </div>
+    </div>
+    <div class="logo-row">
+      <div class="logo-box" style="background:#FAFAFA; border:1px solid #E5E5E5;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#DC2626"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#DC2626;">Red #DC2626</span>
+      </div>
+      <div class="logo-box" style="background:#FAFAFA; border:1px solid #E5E5E5;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#059669"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#059669;">Emerald #059669</span>
+      </div>
+    </div>
+    <div class="logo-row">
+      <div class="logo-box" style="background:#0A0A0A;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#3B82F6"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#3B82F6;">Blue #3B82F6</span>
+      </div>
+      <div class="logo-box" style="background:#0A0A0A;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#A78BFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#A78BFA;">Violet #A78BFA</span>
+      </div>
+    </div>
+    <div class="logo-row">
+      <div class="logo-box" style="background:#0A0A0A;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#F87171"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#F87171;">Red #F87171</span>
+      </div>
+      <div class="logo-box" style="background:#0A0A0A;">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#34D399"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#34D399;">Emerald #34D399</span>
+      </div>
+    </div>
+
+    <!-- Symbol Color on Dark -->
+    <div class="logo-row" style="gap:var(--space-md);">
+      <div class="logo-box" style="background:#0A0A0A; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#3B82F6"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#0A0A0A; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#A78BFA"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#0A0A0A; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#F87171"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#0A0A0A; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#34D399"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#0A0A0A; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FACC15"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:#0A0A0A; padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FB923C"><use href="#logo-symbol"/></svg>
+      </div>
+    </div>
+
+    <!-- 3-4. Gradient Backgrounds -->
+    <h3>Gradient Backgrounds</h3>
+    <div class="logo-row">
+      <div class="logo-box" style="background:linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #3B82F6 100%);">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Midnight → Blue</span>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #1E1B4B 0%, #5B21B6 50%, #A78BFA 100%);">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Indigo → Violet</span>
+      </div>
+    </div>
+    <div class="logo-row">
+      <div class="logo-box" style="background:linear-gradient(135deg, #0A0A0A 0%, #404040 50%, #737373 100%);">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Charcoal</span>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #7F1D1D 0%, #DC2626 50%, #F87171 100%);">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Deep Red → Rose</span>
+      </div>
+    </div>
+    <div class="logo-row">
+      <div class="logo-box" style="background:linear-gradient(135deg, #064E3B 0%, #059669 50%, #34D399 100%);">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Forest → Emerald</span>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #78350F 0%, #D97706 50%, #FBBF24 100%);">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#0A0A0A"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#0A0A0A;">Amber → Gold</span>
+      </div>
+    </div>
+    <div class="logo-row">
+      <div class="logo-box" style="background:linear-gradient(90deg, #0EA5E9 0%, #8B5CF6 50%, #EC4899 100%);">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Sky → Violet → Pink</span>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #0F172A 0%, #0F766E 50%, #5EEAD4 100%);">
+        <svg width="260" height="44" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <span class="logo-box-label" style="color:#FAFAFA;">Dark → Teal → Mint</span>
+      </div>
+    </div>
+
+    <!-- Symbol on Gradients -->
+    <div class="logo-row" style="gap:var(--space-md);">
+      <div class="logo-box" style="background:linear-gradient(135deg, #0F172A, #3B82F6); padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #1E1B4B, #A78BFA); padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #7F1D1D, #F87171); padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #064E3B, #34D399); padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #78350F, #FBBF24); padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#0A0A0A"><use href="#logo-symbol"/></svg>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #0E7490, #67E8F9); padding:var(--space-lg); min-width:120px;">
+        <svg width="72" height="72" viewBox="0 0 100 100" style="color:#0A0A0A"><use href="#logo-symbol"/></svg>
+      </div>
+    </div>
+
+    <!-- 3-5. Clear Space & Minimum Size -->
+    <h3>Clear Space</h3>
+    <p>로고 주변에 최소 심볼 높이의 50%(= 'x' 유닛) 이상의 여백을 확보합니다.</p>
+    <div class="card" style="display:flex; align-items:center; justify-content:center; padding:var(--space-2xl); margin-bottom:var(--space-lg);">
+      <svg width="400" height="120" viewBox="0 0 800 160" style="color:var(--text)">
+        <rect x="40" y="10" width="720" height="140" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+        <use href="#logo-full" x="80" y="30" width="640" height="100"/>
+        <line x1="40" y1="145" x2="80" y2="145" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+        <text x="55" y="155" font-size="10" fill="currentColor" text-anchor="middle" opacity="0.5" style="font-family:var(--font-mono)">x</text>
+      </svg>
+    </div>
+
+    <h3>Minimum Size</h3>
+    <p>풀 로고 최소 너비: <strong>120px</strong> (디지털), <strong>30mm</strong> (인쇄). 심볼 단독: 최소 <strong>24px</strong> / <strong>8mm</strong>.</p>
+
+    <!-- 3-6. Logo Misuse -->
+    <h3>Logo Misuse</h3>
+    <div class="misuse-grid">
+      <div class="misuse-item">
+        <svg width="80" height="40" viewBox="0 0 660 100" style="color:var(--text); transform:rotate(15deg)"><use href="#logo-full"/></svg>
+        <div class="misuse-label">회전 금지</div>
+      </div>
+      <div class="misuse-item">
+        <svg width="80" height="40" viewBox="0 0 660 100" style="color:var(--text); transform:scaleX(1.4)"><use href="#logo-full"/></svg>
+        <div class="misuse-label">비율 변경 금지</div>
+      </div>
+      <div class="misuse-item">
+        <svg width="80" height="40" viewBox="0 0 660 100" style="color:orange"><use href="#logo-full"/></svg>
+        <div class="misuse-label">비승인 색상 금지</div>
+      </div>
+      <div class="misuse-item">
+        <svg width="80" height="40" viewBox="0 0 660 100" style="color:var(--text); opacity:0.3"><use href="#logo-full"/></svg>
+        <div class="misuse-label">저대비 사용 금지</div>
+      </div>
+      <div class="misuse-item">
+        <svg width="80" height="40" viewBox="0 0 660 100" style="color:var(--text); filter:drop-shadow(3px 3px 2px rgba(0,0,0,0.5))"><use href="#logo-full"/></svg>
+        <div class="misuse-label">그림자 효과 금지</div>
+      </div>
+      <div class="misuse-item">
+        <svg width="80" height="40" viewBox="0 0 660 100" style="color:var(--text); filter:blur(1px)"><use href="#logo-full"/></svg>
+        <div class="misuse-label">블러 효과 금지</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Logo Construction -->
+  <section id="construction">
+    <h2>Logo Construction</h2>
+    <p>모든 로고 요소는 정수 좌표 기반의 기하학적 설계입니다. 폰트를 사용하지 않습니다. 심볼의 핵심 치수는 피보나치 수열 <strong>8, 13, 21, 34</strong>로 구성되며, 인접한 수의 비율은 황금비 φ ≈ 1.618에 수렴합니다.</p>
+
+    <h3>Fibonacci Proportions</h3>
+    <div class="fib-bar">
+      <div style="flex:8; background:#0A0A0A;">8</div>
+      <div style="flex:13; background:#404040;">13</div>
+      <div style="flex:21; background:#737373;">21</div>
+      <div style="flex:34; background:#B0B0B0; color:#0A0A0A;">34</div>
+    </div>
+
+    <h3>Construction Diagram</h3>
+    <div class="card" style="margin-bottom:var(--space-lg); overflow-x:auto;">
+      <svg width="100%" viewBox="-8 5 120 90" style="max-width:700px;">
+        <g>
+          <line x1="0" y1="10" x2="0" y2="90" class="construction-grid axis"/>
+          <line x1="10" y1="10" x2="10" y2="90" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+          <line x1="20" y1="10" x2="20" y2="90" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+          <line x1="30" y1="10" x2="30" y2="90" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+          <line x1="40" y1="10" x2="40" y2="90" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+          <line x1="50" y1="10" x2="50" y2="90" class="construction-grid axis"/>
+          <line x1="60" y1="10" x2="60" y2="90" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+          <line x1="70" y1="10" x2="70" y2="90" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+          <line x1="80" y1="10" x2="80" y2="90" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+          <line x1="90" y1="10" x2="90" y2="90" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+          <line x1="100" y1="10" x2="100" y2="90" class="construction-grid axis"/>
+          <line x1="0" y1="50" x2="100" y2="50" class="construction-grid axis"/>
+          <line x1="0" y1="30" x2="100" y2="30" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+          <line x1="0" y1="70" x2="100" y2="70" style="stroke:var(--brand-300);stroke-width:0.3;opacity:0.3"/>
+        </g>
+        <g style="color:var(--text)">
+          <circle cx="24" cy="50" r="8" fill="none" stroke="currentColor" stroke-width="3.5"/>
+          <line x1="32" y1="50" x2="45" y2="50" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="58" cy="50" r="13" fill="currentColor" stroke="currentColor" stroke-width="3.5" opacity="0.15"/>
+          <circle cx="58" cy="50" r="13" fill="none" stroke="currentColor" stroke-width="3.5"/>
+          <line x1="71" y1="50" x2="79" y2="50" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+          <polyline points="77,43 84,50 77,57" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <!-- Dimensions -->
+        <line x1="24" y1="50" x2="32" y2="50" class="dim-line"/>
+        <circle cx="24" cy="50" r="0.8" class="coord-dot"/>
+        <circle cx="32" cy="50" r="0.8" class="coord-dot"/>
+        <text x="28" y="47" class="dim-label" text-anchor="middle">r&#8321;=8</text>
+        <line x1="58" y1="50" x2="71" y2="50" class="dim-line"/>
+        <circle cx="58" cy="50" r="0.8" class="coord-dot"/>
+        <circle cx="71" cy="50" r="0.8" class="coord-dot"/>
+        <text x="64.5" y="47" class="dim-label" text-anchor="middle">r&#8322;=13</text>
+        <line x1="24" y1="74" x2="58" y2="74" class="dim-line"/>
+        <line x1="24" y1="72" x2="24" y2="76" stroke="#DC2626" stroke-width="0.4"/>
+        <line x1="58" y1="72" x2="58" y2="76" stroke="#DC2626" stroke-width="0.4"/>
+        <text x="41" y="78" class="dim-label" text-anchor="middle">d = 34</text>
+        <line x1="32" y1="80" x2="45" y2="80" class="dim-line"/>
+        <line x1="32" y1="78" x2="32" y2="82" stroke="#DC2626" stroke-width="0.4"/>
+        <line x1="45" y1="78" x2="45" y2="82" stroke="#DC2626" stroke-width="0.4"/>
+        <text x="38.5" y="85" class="dim-label" text-anchor="middle">gap=13</text>
+        <line x1="71" y1="80" x2="84" y2="80" class="dim-line"/>
+        <line x1="71" y1="78" x2="71" y2="82" stroke="#DC2626" stroke-width="0.4"/>
+        <line x1="84" y1="78" x2="84" y2="82" stroke="#DC2626" stroke-width="0.4"/>
+        <text x="77.5" y="85" class="dim-label" text-anchor="middle">arrow=13</text>
+        <text x="24" y="33" class="fib-label" text-anchor="middle">Fib: 8</text>
+        <text x="58" y="33" class="fib-label" text-anchor="middle">Fib: 13</text>
+        <text x="41" y="70" class="fib-label" text-anchor="middle">Fib: 34</text>
+        <text x="16" y="44" class="coord-label">(24,50)</text>
+        <text x="55" y="40" class="coord-label">(58,50)</text>
+        <text x="82" y="44" class="coord-label">(84,50)</text>
+      </svg>
+    </div>
+
+    <h3>Golden Ratio Relationships</h3>
+    <table>
+      <thead><tr><th>Relationship</th><th>Values</th><th>Ratio</th><th>φ Target</th></tr></thead>
+      <tbody>
+        <tr><td>r&#8322; / r&#8321;</td><td><code>13 / 8</code></td><td><span class="ratio-badge">1.625</span></td><td>1.618</td></tr>
+        <tr><td>center distance / (r&#8321; + r&#8322;)</td><td><code>34 / 21</code></td><td><span class="ratio-badge">1.619</span></td><td>1.618</td></tr>
+        <tr><td>edge gap / r&#8321;</td><td><code>13 / 8</code></td><td><span class="ratio-badge">1.625</span></td><td>1.618</td></tr>
+        <tr><td>arrow length / r&#8321;</td><td><code>13 / 8</code></td><td><span class="ratio-badge">1.625</span></td><td>1.618</td></tr>
+        <tr><td>Fibonacci sequence</td><td colspan="3"><code>8 → 13 → 21 → 34</code> (consecutive Fibonacci numbers)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Symbol Coordinate Table</h3>
+    <table>
+      <thead><tr><th>Element</th><th>SVG Type</th><th>Coordinates</th><th>Parameters</th></tr></thead>
+      <tbody>
+        <tr><td>Start point (hollow)</td><td><code>circle</code></td><td><code>cx=24, cy=50</code></td><td><code>r=8</code>, fill=none, stroke-width=3.5</td></tr>
+        <tr><td>Connecting line</td><td><code>line</code></td><td><code>(32,50) → (45,50)</code></td><td>stroke-width=3.5, linecap=round</td></tr>
+        <tr><td>End point (filled)</td><td><code>circle</code></td><td><code>cx=58, cy=50</code></td><td><code>r=13</code>, fill=currentColor, stroke-width=3.5</td></tr>
+        <tr><td>Arrow shaft</td><td><code>line</code></td><td><code>(71,50) → (79,50)</code></td><td>stroke-width=3.5, linecap=round</td></tr>
+        <tr><td>Arrow head</td><td><code>polyline</code></td><td><code>(77,43) → (84,50) → (77,57)</code></td><td>stroke-width=3.5, linecap/linejoin=round</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Wordmark Coordinate Table</h3>
+    <table>
+      <thead><tr><th>Letter</th><th>X Range</th><th>Key Coords</th><th>Structure</th></tr></thead>
+      <tbody>
+        <tr><td><strong>p</strong></td><td>10–50</td><td>stem: x=10, bowl: 10→50 (y 15–60), descender: y→95</td><td>세로축 + 상단 볼 + 디센더</td></tr>
+        <tr><td><strong>r</strong></td><td>70–88</td><td>stem: x=70 (y 15–60), arm: 70→88 (y=15)</td><td>세로축 + 우측 어깨</td></tr>
+        <tr><td><strong>e</strong></td><td>108–148</td><td>crossbar: y=38, bowl: 108→148</td><td>가로축 + 원형 볼 + 열린 하단</td></tr>
+        <tr><td><strong>d</strong></td><td>158–198</td><td>bowl: 158→198, ascender stem: x=198 (y 0–60)</td><td>볼 + 어센더 세로축</td></tr>
+        <tr><td><strong>u</strong></td><td>218–258</td><td>left stem: x=218, right stem: x=258, base curve: y=45–60</td><td>양쪽 세로축 + 하단 곡선</td></tr>
+        <tr><td><strong>n</strong></td><td>278–318</td><td>left stem: x=278, right stem: x=318, arch: y=15–30</td><td>양쪽 세로축 + 상단 아치</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Design Principles</h3>
+    <div class="grid-2">
+      <div class="card"><h3>viewBox</h3><p style="margin-bottom:0">심볼: <code>0 0 100 100</code><br>워드마크: <code>0 0 520 100</code><br>풀 로고: <code>0 0 660 100</code></p></div>
+      <div class="card"><h3>Stroke</h3><p style="margin-bottom:0">워드마크: <code>stroke-width: 8</code><br>심볼: <code>stroke-width: 3.5</code><br><code>stroke-linecap/linejoin: round</code></p></div>
+    </div>
+  </section>
+
+  <!-- 5. Color System -->
+  <section id="color">
+    <h2>Color System</h2>
+    <p>모노크롬 베이스. Apple, Nike처럼 단색이 기본이며, 어떤 액센트 색상이든 적용 가능한 유연한 구조입니다.</p>
+
+    <h3>Core Palette</h3>
+    <div class="swatch-grid">
+      <div class="swatch" onclick="copySwatch('#0A0A0A')"><div class="swatch-color" style="background:#0A0A0A"></div><div class="swatch-info"><div class="swatch-name">Black</div><div class="swatch-hex">#0A0A0A</div></div></div>
+      <div class="swatch" onclick="copySwatch('#1A1A1A')"><div class="swatch-color" style="background:#1A1A1A"></div><div class="swatch-info"><div class="swatch-name">900</div><div class="swatch-hex">#1A1A1A</div></div></div>
+      <div class="swatch" onclick="copySwatch('#404040')"><div class="swatch-color" style="background:#404040"></div><div class="swatch-info"><div class="swatch-name">700</div><div class="swatch-hex">#404040</div></div></div>
+      <div class="swatch" onclick="copySwatch('#737373')"><div class="swatch-color" style="background:#737373"></div><div class="swatch-info"><div class="swatch-name">500</div><div class="swatch-hex">#737373</div></div></div>
+      <div class="swatch" onclick="copySwatch('#B0B0B0')"><div class="swatch-color" style="background:#B0B0B0"></div><div class="swatch-info"><div class="swatch-name">300</div><div class="swatch-hex">#B0B0B0</div></div></div>
+      <div class="swatch" onclick="copySwatch('#E5E5E5')"><div class="swatch-color" style="background:#E5E5E5"></div><div class="swatch-info"><div class="swatch-name">100</div><div class="swatch-hex">#E5E5E5</div></div></div>
+      <div class="swatch" onclick="copySwatch('#FAFAFA')"><div class="swatch-color" style="background:#FAFAFA; border-bottom:1px solid #E5E5E5;"></div><div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#FAFAFA</div></div></div>
+    </div>
+
+    <h3>Accent System</h3>
+    <p>기본 액센트는 Black(<code>#0A0A0A</code>)입니다. 제품/캠페인에 따라 <code>--accent</code> CSS 변수를 교체하여 브랜드 톤을 유지하면서 색상을 전환할 수 있습니다.</p>
+    <div class="grid-4" style="margin-top:var(--space-md);">
+      <div class="card" style="text-align:center; padding:var(--space-md);"><div style="width:48px;height:48px;border-radius:50%;background:#0A0A0A;margin:0 auto var(--space-sm);"></div><div style="font-size:0.75rem;color:var(--text-muted);">Default</div></div>
+      <div class="card" style="text-align:center; padding:var(--space-md);"><div style="width:48px;height:48px;border-radius:50%;background:#2563EB;margin:0 auto var(--space-sm);"></div><div style="font-size:0.75rem;color:var(--text-muted);">Blue</div></div>
+      <div class="card" style="text-align:center; padding:var(--space-md);"><div style="width:48px;height:48px;border-radius:50%;background:#DC2626;margin:0 auto var(--space-sm);"></div><div style="font-size:0.75rem;color:var(--text-muted);">Red</div></div>
+      <div class="card" style="text-align:center; padding:var(--space-md);"><div style="width:48px;height:48px;border-radius:50%;background:#16A34A;margin:0 auto var(--space-sm);"></div><div style="font-size:0.75rem;color:var(--text-muted);">Green</div></div>
+    </div>
+
+    <h3>CSS Variables</h3>
+    <pre><code>:root {
+  --brand-black: #0A0A0A;
+  --brand-900:   #1A1A1A;
+  --brand-700:   #404040;
+  --brand-500:   #737373;
+  --brand-300:   #B0B0B0;
+  --brand-100:   #E5E5E5;
+  --brand-white:  #FAFAFA;
+  --accent:      #0A0A0A;  /* 교체 가능 */
+}</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+  </section>
+
+  <!-- 6. Typography -->
+  <section id="typography">
+    <h2>Typography</h2>
+    <p>시스템 폰트 스택을 사용합니다. 로딩 없이 모든 플랫폼에서 최적의 가독성을 보장합니다.</p>
+
+    <h3>Font Stack</h3>
+    <pre><code>font-family: -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue',
+  Arial, sans-serif;</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    <pre><code>/* Monospace */
+font-family: 'SF Mono', 'Fira Code',
+  'Cascadia Code', Consolas, monospace;</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <h3>Type Scale</h3>
+    <div style="margin-bottom:var(--space-xl);">
+      <div class="type-row"><span class="type-label">3rem / 48px</span><span style="font-size:3rem; font-weight:700; letter-spacing:-0.03em; line-height:1.1; color:var(--text);">Display</span></div>
+      <div class="type-row"><span class="type-label">2.5rem / 40px</span><span style="font-size:2.5rem; font-weight:700; letter-spacing:-0.03em; line-height:1.1; color:var(--text);">Heading 1</span></div>
+      <div class="type-row"><span class="type-label">1.75rem / 28px</span><span style="font-size:1.75rem; font-weight:700; letter-spacing:-0.02em; color:var(--text);">Heading 2</span></div>
+      <div class="type-row"><span class="type-label">1.125rem / 18px</span><span style="font-size:1.125rem; font-weight:600; color:var(--text);">Heading 3</span></div>
+      <div class="type-row"><span class="type-label">1rem / 16px</span><span style="font-size:1rem; color:var(--text);">Body — 기본 텍스트 크기입니다.</span></div>
+      <div class="type-row"><span class="type-label">0.875rem / 14px</span><span style="font-size:0.875rem; color:var(--text-secondary);">Small — 보조 정보에 사용합니다.</span></div>
+      <div class="type-row"><span class="type-label">0.75rem / 12px</span><span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Caption — 라벨, 캡션</span></div>
+    </div>
+
+    <h3>Weight</h3>
+    <div class="grid-3">
+      <div class="card" style="text-align:center"><span style="font-size:1.5rem; font-weight:400;">Aa</span><div style="font-size:0.75rem; color:var(--text-muted); margin-top:var(--space-xs);">Regular 400</div></div>
+      <div class="card" style="text-align:center"><span style="font-size:1.5rem; font-weight:600;">Aa</span><div style="font-size:0.75rem; color:var(--text-muted); margin-top:var(--space-xs);">SemiBold 600</div></div>
+      <div class="card" style="text-align:center"><span style="font-size:1.5rem; font-weight:700;">Aa</span><div style="font-size:0.75rem; color:var(--text-muted); margin-top:var(--space-xs);">Bold 700</div></div>
+    </div>
+  </section>
+
+  <!-- 7. Tone & Voice -->
+  <section id="voice">
+    <h2>Tone &amp; Voice</h2>
+    <p>predun의 커뮤니케이션은 <strong>간결하고 확신에 차 있으며 기술적이되 접근 가능</strong>합니다.</p>
+
+    <h3>원칙</h3>
+    <div class="grid-2" style="margin-bottom:var(--space-xl);">
+      <div class="card"><h3>Direct</h3><p style="margin-bottom:0">돌려 말하지 않는다. 결과를 먼저, 설명은 나중에.</p></div>
+      <div class="card"><h3>Confident</h3><p style="margin-bottom:0">"~할 수 있습니다"가 아니라 "합니다". 확신의 톤.</p></div>
+      <div class="card"><h3>Technical</h3><p style="margin-bottom:0">전문 용어를 두려워하지 않되, 맥락 없는 전문 용어는 쓰지 않는다.</p></div>
+      <div class="card"><h3>Energetic</h3><p style="margin-bottom:0">속도감이 느껴지는 짧은 문장. 정적이 아닌 동적.</p></div>
+    </div>
+
+    <h3>Do / Don't</h3>
+    <div class="do-dont">
+      <div class="do-list"><h4>Do</h4><ul><li>짧고 임팩트 있는 문장</li><li>결과 중심의 서술</li><li>능동태 사용</li><li>구체적인 숫자와 사실</li><li>사용자 관점의 이점 강조</li></ul></div>
+      <div class="dont-list"><h4>Don't</h4><ul><li>장황한 수식어</li><li>모호한 약속 ("최선을 다하겠습니다")</li><li>수동태 남용</li><li>불필요한 겸양 표현</li><li>유행어/버즈워드 남발</li></ul></div>
+    </div>
+
+    <h3>예시</h3>
+    <table>
+      <thead><tr><th>Before</th><th>After (predun style)</th></tr></thead>
+      <tbody>
+        <tr><td>"저희 서비스를 이용하시면 더 빠른 결과를 경험하실 수 있습니다"</td><td>"시작하면 끝나 있습니다."</td></tr>
+        <tr><td>"AI 기술을 활용하여 최적화된 솔루션을 제공하고자 합니다"</td><td>"AI가 미리 준비합니다. 당신은 결과만 확인하세요."</td></tr>
+        <tr><td>"빠른 시일 내에 처리해드리도록 하겠습니다"</td><td>"이미 처리되었습니다."</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8. Applications -->
+  <section id="applications">
+    <h2>Applications</h2>
+
+    <h3>Business Card</h3>
+    <div class="grid-2" style="margin-bottom:var(--space-xl);">
+      <div>
+        <div class="biz-card">
+          <div><svg width="60" height="18" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg></div>
+          <div><div class="biz-card-name">홍길동</div><div class="biz-card-title">Software Engineer</div></div>
+          <div class="biz-card-contact">hong@predun.ai<br>+82 10-1234-5678</div>
+        </div>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:var(--space-sm);">Front — 90×50mm</p>
+      </div>
+      <div>
+        <div class="biz-card" style="align-items:center; justify-content:center;">
+          <svg width="80" height="80" viewBox="0 0 100 100" style="color:#FAFAFA"><use href="#logo-symbol"/></svg>
+        </div>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:var(--space-sm);">Back — Symbol only</p>
+      </div>
+    </div>
+
+    <h3>Web Header</h3>
+    <div class="mockup">
+      <div class="mockup-header"><div class="mockup-dots"><span></span><span></span><span></span></div></div>
+      <div style="background:#0A0A0A; display:flex; align-items:center; justify-content:space-between; padding:var(--space-md) var(--space-xl);">
+        <svg width="120" height="20" viewBox="0 0 660 100" style="color:#FAFAFA"><use href="#logo-full"/></svg>
+        <div style="display:flex; gap:var(--space-lg); font-size:0.8rem; color:#B0B0B0;">
+          <span>Product</span><span>About</span><span>Blog</span><span style="color:#FAFAFA; font-weight:600;">Get Started</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Favicon</h3>
+    <div class="logo-row" style="gap:var(--space-md);">
+      <div class="logo-box" style="background:#0A0A0A; padding:var(--space-lg); flex:0;">
+        <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 32 32" style="color:#FAFAFA"><use href="#logo-favicon"/></svg>
+        </div>
+      </div>
+      <div class="logo-box" style="background:#FAFAFA; border:1px solid #E5E5E5; padding:var(--space-lg); flex:0;">
+        <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 32 32" style="color:#0A0A0A"><use href="#logo-favicon"/></svg>
+        </div>
+      </div>
+      <div class="logo-box" style="background:linear-gradient(135deg, #0F172A, #3B82F6); padding:var(--space-lg); flex:0;">
+        <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 32 32" style="color:#FAFAFA"><use href="#logo-favicon"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Assets -->
+  <section id="assets">
+    <h2>Assets</h2>
+    <p>아래 SVG 코드를 복사하여 사용하세요. 모든 로고는 <code>currentColor</code>를 사용하므로 부모의 <code>color</code> 속성에 따라 색상이 변합니다.</p>
+
+    <div class="card" style="margin-bottom:var(--space-md);">
+      <h3>Full Logo SVG</h3>
+      <pre><code>&lt;svg viewBox="0 0 660 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+  style="color: #0A0A0A"&gt;
+  &lt;!-- Symbol (Fibonacci: r1=8, r2=13, d=34) --&gt;
+  &lt;circle cx="24" cy="50" r="8" fill="none" stroke="currentColor"
+    stroke-width="3.5"/&gt;
+  &lt;line x1="32" y1="50" x2="45" y2="50" stroke="currentColor"
+    stroke-width="3.5" stroke-linecap="round"/&gt;
+  &lt;circle cx="58" cy="50" r="13" fill="currentColor"
+    stroke="currentColor" stroke-width="3.5"/&gt;
+  &lt;line x1="71" y1="50" x2="79" y2="50" stroke="currentColor"
+    stroke-width="3.5" stroke-linecap="round"/&gt;
+  &lt;polyline points="77,43 84,50 77,57" fill="none"
+    stroke="currentColor" stroke-width="3.5"
+    stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;!-- Wordmark --&gt;
+  &lt;g transform="translate(120,0)"&gt;
+    &lt;path d="M10,30 L10,95 M10,30 Q10,15 25,15 L35,15 Q50,15
+      50,30 L50,45 Q50,60 35,60 L25,60 Q10,60 10,45"
+      fill="none" stroke="currentColor" stroke-width="8"
+      stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;path d="M70,60 L70,15 M70,15 Q70,15 70,25 Q75,15 88,15"
+      fill="none" stroke="currentColor" stroke-width="8"
+      stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;path d="M108,38 L148,38 Q148,15 128,15 Q108,15 108,38
+      Q108,60 128,60 Q142,60 148,50"
+      fill="none" stroke="currentColor" stroke-width="8"
+      stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;path d="M198,45 Q198,60 183,60 L173,60 Q158,60 158,45
+      L158,30 Q158,15 173,15 L183,15 Q198,15 198,30
+      M198,0 L198,60"
+      fill="none" stroke="currentColor" stroke-width="8"
+      stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;path d="M218,15 L218,45 Q218,60 233,60 L243,60 Q258,60
+      258,45 L258,15"
+      fill="none" stroke="currentColor" stroke-width="8"
+      stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;path d="M278,60 L278,15 M278,30 Q278,15 293,15 L303,15
+      Q318,15 318,30 L318,60"
+      fill="none" stroke="currentColor" stroke-width="8"
+      stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/g&gt;
+&lt;/svg&gt;</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    </div>
+
+    <div class="card" style="margin-bottom:var(--space-md);">
+      <h3>Symbol Only SVG</h3>
+      <pre><code>&lt;svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+  style="color: #0A0A0A"&gt;
+  &lt;circle cx="24" cy="50" r="8" fill="none" stroke="currentColor"
+    stroke-width="3.5"/&gt;
+  &lt;line x1="32" y1="50" x2="45" y2="50" stroke="currentColor"
+    stroke-width="3.5" stroke-linecap="round"/&gt;
+  &lt;circle cx="58" cy="50" r="13" fill="currentColor"
+    stroke="currentColor" stroke-width="3.5"/&gt;
+  &lt;line x1="71" y1="50" x2="79" y2="50" stroke="currentColor"
+    stroke-width="3.5" stroke-linecap="round"/&gt;
+  &lt;polyline points="77,43 84,50 77,57" fill="none"
+    stroke="currentColor" stroke-width="3.5"
+    stroke-linecap="round" stroke-linejoin="round"/&gt;
+&lt;/svg&gt;</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    </div>
+
+    <div class="card" style="margin-bottom:var(--space-md);">
+      <h3>Favicon SVG</h3>
+      <pre><code>&lt;svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+  style="color: #0A0A0A"&gt;
+  &lt;circle cx="9" cy="16" r="4" fill="none" stroke="currentColor"
+    stroke-width="2"/&gt;
+  &lt;line x1="13" y1="16" x2="17" y2="16" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round"/&gt;
+  &lt;circle cx="22" cy="16" r="5" fill="currentColor"
+    stroke="currentColor" stroke-width="2"/&gt;
+  &lt;polyline points="27,16 30,16" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round"/&gt;
+  &lt;polyline points="28.5,13 31,16 28.5,19" fill="none"
+    stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"/&gt;
+&lt;/svg&gt;</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== JavaScript ===== -->
+<script>
+function getTheme() {
+  return document.documentElement.getAttribute('data-theme') ||
+    (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+}
+function toggleTheme() {
+  var next = getTheme() === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function() {
+  var saved = localStorage.getItem('theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
+document.querySelectorAll('#nav a').forEach(function(a) {
+  a.addEventListener('click', function() { document.getElementById('sidebar').classList.remove('open'); });
+});
+var sections = document.querySelectorAll('section[id]');
+var navLinks = document.querySelectorAll('#nav a');
+window.addEventListener('scroll', function() {
+  var scrollY = window.scrollY + 100;
+  sections.forEach(function(sec) {
+    if (sec.offsetTop <= scrollY && sec.offsetTop + sec.offsetHeight > scrollY) {
+      navLinks.forEach(function(a) { a.classList.toggle('active', a.getAttribute('href') === '#' + sec.id); });
+    }
+  });
+}, { passive: true });
+function copySwatch(hex) { navigator.clipboard.writeText(hex); }
+function copyCode(btn) {
+  var code = btn.parentElement.querySelector('code');
+  navigator.clipboard.writeText(code.textContent);
+  btn.textContent = 'Copied!';
+  setTimeout(function() { btn.textContent = 'Copy'; }, 1500);
+}
+</script>
+
+</body>
+</html>
