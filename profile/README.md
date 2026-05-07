@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/predun/.github/main/assets/logo-full-white.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/predun/.github/main/assets/logo-full-black.svg">
-    <img alt="predun" src="https://raw.githubusercontent.com/predun/.github/main/assets/logo-full-black.svg" width="320">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ppredun/.github/main/assets/logo-full-white.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ppredun/.github/main/assets/logo-full-black.svg">
+    <img alt="predun" src="https://raw.githubusercontent.com/ppredun/.github/main/assets/logo-full-black.svg" width="320">
   </picture>
 </p>
 
